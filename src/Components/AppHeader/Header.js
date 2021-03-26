@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
   root: {
-    color: 'white',
+    color: 'black',
     display: 'flex',
     justifyContent: 'space-between',
     margin: 20,

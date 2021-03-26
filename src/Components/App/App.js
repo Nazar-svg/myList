@@ -6,11 +6,13 @@ import TodoList from '../TodoList/TodoList';
 import AddItemPanel from '../AddItemPanel/AddItemPanel';
 
 export default class App extends Component {
+  maxId = 100;
+
   state = {
     todoAray: [
-      { label: 'Вчити реакт' },
-      { label: 'Вчити Англійський' },
-      { label: 'Треніровки' },
+      { label: 'Вчити реакт', important: false, id: this.maxId++ },
+      { label: 'Вчити Англійський', important: false, id: this.maxId++ },
+      { label: 'Треніровки', important: false, id: this.maxId++ },
     ],
   };
   render() {

@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import Input from '../UI/Input/Input';
 
 const useStyles = makeStyles({
   root: {
@@ -28,7 +29,7 @@ export default function Hook() {
   const classes = useStyles();
   return (
     <form className={classes.root}>
-      <input type="text" className={classes.Input} />
+      <Input type="text" className={classes.Input} />
       <Button variant="contained" color="primary" className={classes.btn}>
         Додати
       </Button>

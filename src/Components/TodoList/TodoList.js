@@ -11,7 +11,7 @@ const useStyles = makeStyles({
     padding: 12,
     marginBottom: 10,
     marginLeft: -20,
-    border: '2px solid #CCCCCC',
+    border: '2px solid black',
   },
 });
 
