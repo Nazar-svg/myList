@@ -9,6 +9,8 @@ const useStyles = makeStyles({
     justifyContent: 'space-between',
     justifyItems: 'center',
     color: 'black',
+    fontSize: 20,
+    fontWeight: 600,
   },
   button: {
     margin: 0,
@@ -33,39 +35,56 @@ const useStyles = makeStyles({
     marginRight: 17,
     cursor: 'pointer',
   },
+  done: {
+    textDecoration: 'line-through',
+  },
 });
 
-export default function TodoListItem({ label }) {
+export default function TodoListItem({ label, onDelited }) {
   const classes = useStyles();
-  const [important, setImportant] = useState(false);
+  const cls = [classes];
+  const clsBtn = [classes.iconColor];
+  const [listItem, setListItem] = useState({
+    important: false,
+    done: false,
+  });
 
-  let span = <span className={classes.label}>{label}</span>;
-
-  if (important) {
-    return (
-      <span className={classes.root}>
-        <span className={classes.important}>{label}</span>
-        <div>
-          <PriorityHighIcon
-            onClick={() => setImportant(false)}
-            className={classes.iconColorDisabled}
-          />
-          <DeleteIcon color="secondary" style={{ cursor: 'pointer' }} />
-        </div>
-      </span>
-    );
+  if (listItem.important) {
+    cls.push(classes.important);
+    clsBtn.push(classes.iconColorDisabled);
   }
+  if (listItem.done) {
+    cls.push(classes.done);
+  }
+
+  const onToggleImportant = () => {
+    setListItem({
+      ...listItem,
+      important: !listItem.important,
+    });
+  };
+  const onToggleDone = () => {
+    setListItem({
+      ...listItem,
+      done: !listItem.done,
+    });
+  };
 
   return (
     <span className={classes.root}>
-      {span}
+      <span onClick={onToggleDone} className={cls.join(' ')}>
+        {label}
+      </span>
       <div>
         <PriorityHighIcon
-          className={classes.iconColor}
-          onClick={() => setImportant(true)}
+          className={clsBtn.join(' ')}
+          onClick={onToggleImportant}
         />
-
-        <DeleteIcon color="secondary" style={{ cursor: 'pointer' }} />
+        <DeleteIcon
+          onClick={onDelited}
+          color="secondary"
+          style={{ cursor: 'pointer' }}
+        />
       </div>
     </span>
   );

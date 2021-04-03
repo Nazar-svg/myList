@@ -15,14 +15,14 @@ const useStyles = makeStyles({
   },
 });
 
-export default function TodoList({ todos }) {
+export default function TodoList({ todos, onDelited }) {
   const classes = useStyles();
   return (
     <ul className={classes.root}>
-      {todos.map((item, index) => {
+      {todos.map((item, id) => {
         return (
-          <li key={index} className={classes.li}>
-            <TodoListItem {...item} />
+          <li key={id} className={classes.li}>
+            <TodoListItem {...item} onDelited={() => onDelited(id)} />
           </li>
         );
       })}

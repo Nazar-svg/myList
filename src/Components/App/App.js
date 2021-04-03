@@ -10,17 +10,25 @@ export default class App extends Component {
 
   state = {
     todoAray: [
-      { label: 'Вчити реакт', important: false, id: this.maxId++ },
-      { label: 'Вчити Англійський', important: false, id: this.maxId++ },
-      { label: 'Треніровки', important: false, id: this.maxId++ },
+      { label: 'Вчити реакт', id: this.maxId++ },
+      { label: 'Вчити Англійський', id: this.maxId++ },
+      { label: 'Треніровки', id: this.maxId++ },
     ],
   };
+  onDelitedItem = (id) => {
+    console.log(id);
+  };
+
   render() {
     return (
       <div className="App">
         <Header />
         <SearchPanel />
-        <TodoList todos={this.state.todoAray} />
+        <TodoList
+          onDelited={this.onDelitedItem}
+          todos={this.state.todoAray}
+          onTogleImportant={this.onTogleImportant}
+        />
         <AddItemPanel />
       </div>
     );
