@@ -10,13 +10,40 @@ export default class App extends Component {
 
   state = {
     todoAray: [
-      { label: 'Вчити реакт', id: this.maxId++ },
-      { label: 'Вчити Англійський', id: this.maxId++ },
-      { label: 'Треніровки', id: this.maxId++ },
+      this.createNewItem('Вчити реакт'),
+      this.createNewItem('Вчити Англійський'),
+      this.createNewItem('Треніровки'),
     ],
+    term: '',
   };
+  createNewItem(label) {
+    return {
+      label,
+    };
+  }
   onDelitedItem = (id) => {
+    this.setState(({ todoAray }) => {
+      const index = todoAray.findIndex((el) => el.id === id);
+      const newArray = [
+        ...todoAray.slice(0, index),
+        ...todoAray.slice(index + 1),
+      ];
+
+      return {
+        todoAray: newArray,
+      };
+    });
     console.log(id);
+  };
+  addItemHandler = (text) => {
+    console.log('text', text);
+    const newItem = this.createNewItem(text);
+    this.setState(({ todoAray }) => {
+      const newArr = [...todoAray, newItem];
+      return {
+        todoAray: newArr,
+      };
+    });
   };
 
   render() {
@@ -24,12 +51,8 @@ export default class App extends Component {
       <div className="App">
         <Header />
         <SearchPanel />
-        <TodoList
-          onDelited={this.onDelitedItem}
-          todos={this.state.todoAray}
-          onTogleImportant={this.onTogleImportant}
-        />
-        <AddItemPanel />
+        <TodoList onDelited={this.onDelitedItem} todos={this.state.todoAray} />
+        <AddItemPanel addItemHandler={this.addItemHandler} />
       </div>
     );
   }

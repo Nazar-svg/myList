@@ -18,6 +18,9 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: 30,
     margin: theme.spacing(0.5),
   },
+  red: {
+    borderColor: 'red',
+  },
 }));
 
 const theme = createMuiTheme({
@@ -28,13 +31,18 @@ const theme = createMuiTheme({
 
 export default function CustomizedInputs(props) {
   const classes = useStyles();
+  const cls = [classes.margin];
+  if (props.value === '') {
+    cls.push(classes.red);
+  }
 
   return (
     <form className={classes.root} noValidate>
       <ThemeProvider theme={theme}>
         <TextField
-          onClick={props.onClick}
-          className={classes.margin}
+          onChange={props.onChange}
+          value={props.value}
+          className={cls.join(' ')}
           label="Додати нове завдання"
           variant="outlined"
           id="mui-theme-provider-outlined-input"

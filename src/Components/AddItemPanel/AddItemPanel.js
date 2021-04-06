@@ -25,12 +25,40 @@ const useStyles = makeStyles({
   },
 });
 
-export default function Hook() {
+export default function AdditemPanel(props) {
   const classes = useStyles();
+  const [state, setState] = React.useState({
+    label: '',
+  });
+  const handleChange = (event) => {
+    setState({
+      label: event.target.value,
+    });
+    console.log('ffdga', state.label);
+  };
+  const onSubmit = (e) => {
+    e.preventDefault();
+    if (!state.label == '') {
+      props.addItemHandler(state.label);
+    }
+    setState({
+      label: '',
+    });
+  };
   return (
-    <form className={classes.root}>
-      <Input type="text" className={classes.Input} />
-      <Button variant="contained" color="primary" className={classes.btn}>
+    <form className={classes.root} onSubmit={onSubmit}>
+      <Input
+        type="text"
+        value={state.label}
+        className={classes.Input}
+        onChange={(event) => handleChange(event)}
+      />
+      <Button
+        onClick={onSubmit}
+        variant="contained"
+        color="primary"
+        className={classes.btn}
+      >
         Додати
       </Button>
     </form>

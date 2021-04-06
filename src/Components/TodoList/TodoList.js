@@ -22,7 +22,7 @@ export default function TodoList({ todos, onDelited }) {
       {todos.map((item, id) => {
         return (
           <li key={id} className={classes.li}>
-            <TodoListItem {...item} onDelited={() => onDelited(id)} />
+            <TodoListItem {...item} onDelited={() => onDelited(id + 1)} />
           </li>
         );
       })}

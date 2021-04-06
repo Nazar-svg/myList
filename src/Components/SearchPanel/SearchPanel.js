@@ -22,6 +22,7 @@ const useStyles = makeStyles({
 
 export default function Hook() {
   const classes = useStyles();
+
   return (
     <div className={classes.root}>
       <input type="text" className={classes.Input} />
